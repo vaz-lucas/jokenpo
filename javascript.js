@@ -9,6 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const roundDetails = document.getElementById("roundDetails");
   // const maxPoints = 3;
 
+  // Jokenpo Buttons
+  const playerRock = document.querySelector("playerRock");
+  const playerPaper = document.querySelector("playerPaper");
+  const playerScissor = document.querySelector("playerScissor");
+
   function getComputerChoice() {
     let computerResult = Math.ceil(Math.random() * 3);
     if (computerResult === 1) {
@@ -21,16 +26,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function getPlayerChoice() {
-    playerChoice = prompt("Rock, Paper or Scissor?").toLowerCase();
+  // function getPlayerChoice() {
+  //   playerChoice = prompt("Rock, Paper or Scissor?").toLowerCase();
 
-    while (!["rock", "paper", "scissor"].includes(playerChoice)) {
-      playerChoice = prompt(
-        "Please, choose only one of the three: Rock, Paper or Scissor?",
-      ).toLowerCase();
-    }
-    return playerChoice;
-  }
+  //   while (!["rock", "paper", "scissor"].includes(playerChoice)) {
+  //     playerChoice = prompt(
+  //       "Please, choose only one of the three: Rock, Paper or Scissor?",
+  //     ).toLowerCase();
+  //   }
+  //   return playerChoice;
+  // }
 
   function checkWinner() {
     if (checkGameOver()) return;
