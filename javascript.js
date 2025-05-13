@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const computerPoints = document.getElementById("computerPoints");
   const againBtn = document.getElementById("againBtn");
   const roundDetails = document.getElementById("roundDetails");
-  const maxPoints = 3;
+  // const maxPoints = 3;
 
   function getComputerChoice() {
     let computerResult = Math.ceil(Math.random() * 3);
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return false;
   }
 
-  checkWinner();
+  // checkWinner();
 
   function nextRound() {
     checkWinner();
