@@ -16,6 +16,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const playerScissor = document.getElementById("playerScissor");
   const playerButtons = document.getElementById("playerButtons");
 
+  // Pics
+  const playerPics = document.querySelectorAll("playerPics");
+  const rockPic = document.getElementById("rockPic");
+  const paperPic = document.getElementById("paperPic");
+  const scissorPic = document.getElementById("scissorPic");
+  const picJokenpoPlayer = document.getElementById("picJokenpoPlayer");
+
   function getComputerChoice() {
     let computerResult = Math.ceil(Math.random() * 3);
     if (computerResult === 1) {
@@ -52,7 +59,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function changePictures() {}
+  function changePictures() {
+    if (playerRock.checked) {
+      for (const pic of playerPics) {
+        pic.classList.add("hide");
+      }
+      rockPic.classList.remove("hide");
+    } else if (playerPaper.checked) {
+      for (const pic of playerPics) {
+        pic.classList.add("hide");
+      }
+      paperPic.classList.remove("hide");
+    } else {
+      for (const pic of playerPics) {
+        pic.classList.add("hide");
+      }
+      scissorPic.classList.remove("hide");
+    }
+  }
 
   function checkWinner() {
     // if (checkGameOver()) return;
@@ -107,6 +131,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function nextRound() {
     checkWinner();
   }
+  changePictures();
   getPlayerChoice();
   fightBtn.addEventListener("click", checkWinner);
+  picJokenpoPlayer.addEventListener("change", changePictures);
 });

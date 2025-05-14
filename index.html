@@ -16,10 +16,25 @@
                     <h2>Player Score:</h2>
                     <p id="playerPoints">0</p>
                 </div>
-                <div class="picJokenpoPlayer">
-                    <img src="imgs/rock-svgrepo-com.svg" alt="" class="hide" />
-                    <img src="imgs/rock-svgrepo-com.svg" alt="" class="hide" />
-                    <img src="imgs/rock-svgrepo-com.svg" alt="" />
+                <div id="picJokenpoPlayer">
+                    <img
+                        src="imgs/rock-svgrepo-com.svg"
+                        alt=""
+                        class="hide playerPics"
+                        id="rockPic"
+                    />
+                    <img
+                        src="imgs/paper-svgrepo-com.svg"
+                        alt=""
+                        class="hide playerPics"
+                        id="paperPic"
+                    />
+                    <img
+                        src="imgs/scissor-svgrepo-com.svg"
+                        alt=""
+                        class="playerPics"
+                        id="scissorPic"
+                    />
                 </div>
             </div>
 
@@ -62,7 +77,7 @@
         <!-- Player buttons -->
         <div id="playerButtons">
             <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-primary active">
+                <label class="btn">
                     <input
                         type="radio"
                         name="options"
@@ -71,11 +86,11 @@
                     />
                     Rock
                 </label>
-                <label class="btn btn-primary">
+                <label class="btn">
                     <input type="radio" name="options" id="playerPaper" />
                     Paper
                 </label>
-                <label class="btn btn-primary">
+                <label class="btn">
                     <input type="radio" name="options" id="playerScissor" />
                     Scissor
                 </label>
