@@ -9,6 +9,7 @@
     <body>
         <h1>The Real Game For Gamers!</h1>
 
+        <!-- Player Part -->
         <section class="choices">
             <div class="playerChoice">
                 <div class="playerScore">
@@ -16,47 +17,78 @@
                     <p id="playerPoints">0</p>
                 </div>
                 <div class="picJokenpoPlayer">
+                    <img src="imgs/rock-svgrepo-com.svg" alt="" class="hide" />
+                    <img src="imgs/rock-svgrepo-com.svg" alt="" class="hide" />
                     <img src="imgs/rock-svgrepo-com.svg" alt="" />
                 </div>
             </div>
+
+            <!-- Fight Button to see result -->
+
             <div class="vsP">
                 <p>VS</p>
-                <button class="fight">FIGHT</button>
+                <button id="fightBtn">FIGHT</button>
+                <p id="roundDetails"></p>
             </div>
+
+            <!-- Computer Part -->
+
             <div class="computerChoice">
                 <div class="computerScore">
                     <h2>Fake AI Score:</h2>
                     <p id="computerPoints">0</p>
                 </div>
                 <div>
+                    <img src="imgs/question-mark-svgrepo-com.svg" alt="" />
                     <img
                         src="imgs/question-mark-svgrepo-com.svg"
                         alt=""
-                        class=""
+                        class="hide"
+                    />
+                    <img
+                        src="imgs/question-mark-svgrepo-com.svg"
+                        alt=""
+                        class="hide"
+                    />
+                    <img
+                        src="imgs/question-mark-svgrepo-com.svg"
+                        alt=""
+                        class="hide"
                     />
                 </div>
             </div>
         </section>
-        <div class="playerButtons">
-            <button class="playerRock">Rock</button>
-            <button class="playerPaper">Paper</button>
-            <button class="playerScissor">Scissor</button>
+
+        <!-- Player buttons -->
+        <div id="playerButtons">
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary active">
+                    <input
+                        type="radio"
+                        name="options"
+                        id="playerRock"
+                        checked
+                    />
+                    Rock
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" name="options" id="playerPaper" />
+                    Paper
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" name="options" id="playerScissor" />
+                    Scissor
+                </label>
+            </div>
         </div>
 
-        <section class="scores">
-            <div class="computerScore">
-                <h2>Fake AI Score:</h2>
-                <p id="computerPoints">0</p>
-            </div>
-            <div class="playerScore">
-                <h2>Player Score:</h2>
-                <p id="playerPoints">0</p>
-            </div>
+        <!-- Need to check -->
 
-            <p id="roundDetails"></p>
-        </section>
+        <section class="scores"></section>
 
-        <button id="againBtn">Again!</button>
+        <button id="resetBtn">Reset</button>
+
+        <!-- End -->
 
         <script src="javascript.js"></script>
     </body>

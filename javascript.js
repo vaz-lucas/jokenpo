@@ -5,14 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const scissor = "scissor";
   const playerPoints = document.getElementById("playerPoints");
   const computerPoints = document.getElementById("computerPoints");
-  const againBtn = document.getElementById("againBtn");
+  const resetBtn = document.getElementById("resetBtn");
   const roundDetails = document.getElementById("roundDetails");
+  const fightBtn = document.getElementById("fightBtn");
   // const maxPoints = 3;
 
   // Jokenpo Buttons
-  const playerRock = document.querySelector("playerRock");
-  const playerPaper = document.querySelector("playerPaper");
-  const playerScissor = document.querySelector("playerScissor");
+  const playerRock = document.getElementById("playerRock");
+  const playerPaper = document.getElementById("playerPaper");
+  const playerScissor = document.getElementById("playerScissor");
+  const playerButtons = document.getElementById("playerButtons");
 
   function getComputerChoice() {
     let computerResult = Math.ceil(Math.random() * 3);
@@ -37,8 +39,23 @@ document.addEventListener("DOMContentLoaded", () => {
   //   return playerChoice;
   // }
 
+  function getPlayerChoice() {
+    if (playerRock.checked) {
+      console.log("ROCK ROCK ROCK");
+      return "rock";
+    } else if (playerPaper.checked) {
+      console.log("PAPER PAPER PAPER");
+      return "paper";
+    } else {
+      console.log("SCISSOR SCISSOR SCISSOR");
+      return "scissor";
+    }
+  }
+
+  function changePictures() {}
+
   function checkWinner() {
-    if (checkGameOver()) return;
+    // if (checkGameOver()) return;
 
     const computerInput = getComputerChoice();
     const playerInput = getPlayerChoice();
@@ -65,31 +82,31 @@ document.addEventListener("DOMContentLoaded", () => {
       roundDetails.textContent = "Round tie!";
     }
 
-    checkGameOver();
+    // checkGameOver();
   }
 
-  function checkGameOver() {
-    const playerScore = parseInt(playerPoints.textContent);
-    const computerScore = parseInt(computerPoints.textContent);
+  // function checkGameOver() {
+  //   const playerScore = parseInt(playerPoints.textContent);
+  //   const computerScore = parseInt(computerPoints.textContent);
 
-    if (playerScore >= maxPoints) {
-      roundDetails.textContent = "You won the game!";
-      againBtn.disabled = true;
-      return true;
-    }
-    if (computerScore >= maxPoints) {
-      roundDetails.textContent = "Fake AI won the game!";
-      againBtn.disabled = true;
-      return true;
-    }
-    return false;
-  }
+  //   if (playerScore >= maxPoints) {
+  //     roundDetails.textContent = "You won the game!";
+  //     againBtn.disabled = true;
+  //     return true;
+  //   }
+  //   if (computerScore >= maxPoints) {
+  //     roundDetails.textContent = "Fake AI won the game!";
+  //     againBtn.disabled = true;
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   // checkWinner();
 
   function nextRound() {
     checkWinner();
   }
-
-  againBtn.addEventListener("click", nextRound);
+  getPlayerChoice();
+  fightBtn.addEventListener("click", checkWinner);
 });
