@@ -79,3 +79,26 @@ img {
 .hide {
     display: none;
 }
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.btn {
+    padding: 10px 20px;
+    background: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn input {
+    display: none;
+}
+
+.btn.active {
+    background: #4caf50;
+    color: white;
+}

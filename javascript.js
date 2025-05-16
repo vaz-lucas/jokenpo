@@ -1,13 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-  let playerChoice = "";
   const rock = "rock";
   const paper = "paper";
   const scissor = "scissor";
   const playerPoints = document.getElementById("playerPoints");
   const computerPoints = document.getElementById("computerPoints");
-  const resetBtn = document.getElementById("resetBtn");
   const roundDetails = document.getElementById("roundDetails");
   const fightBtn = document.getElementById("fightBtn");
+  const resetBtn = document.getElementById("resetBtn");
   // const maxPoints = 3;
 
   // Jokenpo Buttons
@@ -16,12 +15,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const playerScissor = document.getElementById("playerScissor");
   const playerButtons = document.getElementById("playerButtons");
 
-  // Pics
-  const playerPics = document.querySelectorAll("playerPics");
+  // Player Pics
+  const playerPics = document.querySelectorAll(".playerPics");
   const rockPic = document.getElementById("rockPic");
   const paperPic = document.getElementById("paperPic");
   const scissorPic = document.getElementById("scissorPic");
-  const picJokenpoPlayer = document.getElementById("picJokenpoPlayer");
+  // const picJokenpoPlayer = document.getElementById("picJokenpoPlayer");
+
+  // Fake AI Pics
+  const computerPics = document.querySelectorAll(".computerPic");
+  const computerQuestion = document.getElementById("computerQuestion");
+  const computerRock = document.getElementById("computerRock");
+  const computerPaper = document.getElementById("computerPaper");
+  const computerScissor = document.getElementById("computerScissor");
+
+  // Variáveis de estado
+  let playerChoice = "";
+  let computerChoice = "";
 
   function getComputerChoice() {
     let computerResult = Math.ceil(Math.random() * 3);
@@ -59,23 +69,56 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function changePictures() {
+  function changePlayerPicture() {
+    // Esconde todas as imagens do jogador
+    playerPics.forEach((pic) => pic.classList.add("hide"));
+
+    // Mostra a imagem selecionada
     if (playerRock.checked) {
-      for (const pic of playerPics) {
-        pic.classList.add("hide");
-      }
       rockPic.classList.remove("hide");
+      playerChoice = "rock";
     } else if (playerPaper.checked) {
-      for (const pic of playerPics) {
-        pic.classList.add("hide");
-      }
       paperPic.classList.remove("hide");
-    } else {
-      for (const pic of playerPics) {
-        pic.classList.add("hide");
-      }
+      playerChoice = "paper";
+    } else if (playerScissor.checked) {
       scissorPic.classList.remove("hide");
+      playerChoice = "scissor";
     }
+  }
+
+  function revealComputerChoice(choice) {
+    computerQuestion.classList.add("hide");
+    computerPics.forEach((pic) => pic.classList.add("hide"));
+
+    switch (choice) {
+      case "rock":
+        computerRock.classList.remove("hide");
+        break;
+      case "paper":
+        computerPaper.classList.remove("hide");
+        break;
+      case "scissor":
+        computerScissor.classList.remove("hide");
+        break;
+    }
+  }
+
+  function resetImages() {
+    computerPics.forEach((pic) => pic.classList.add("hide"));
+    computerQuestion.classList.remove("hide");
+
+    changePlayerPicture();
+  }
+
+  function playRound() {
+    if (!playerChoice) {
+      roundDetails.textContent = "Please select an option!";
+      return;
+    }
+
+    computerChoice = getComputerChoice();
+    revealComputerChoice(computerChoice);
+    checkWinner();
   }
 
   function checkWinner() {
@@ -131,8 +174,26 @@ document.addEventListener("DOMContentLoaded", () => {
   function nextRound() {
     checkWinner();
   }
-  changePictures();
+
   getPlayerChoice();
-  fightBtn.addEventListener("click", checkWinner);
-  picJokenpoPlayer.addEventListener("change", changePictures);
+
+  function resetBattle() {
+    playerPoints.textContent = "0";
+    computerPoints.textContent = "0";
+    roundDetails.textContent = "";
+    resetImages();
+  }
+
+  // Event Listeners
+  fightBtn.addEventListener("click", playRound);
+  resetBtn.addEventListener("click", resetBattle);
+
+  // Change player picture
+  playerRock.addEventListener("change", changePlayerPicture);
+  playerPaper.addEventListener("change", changePlayerPicture);
+  playerScissor.addEventListener("change", changePlayerPicture);
+
+  // Inicializa com uma seleção padrão
+  playerRock.checked = true;
+  changePlayerPicture();
 });
