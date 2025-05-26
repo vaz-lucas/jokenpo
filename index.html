@@ -9,20 +9,108 @@
     <body>
         <h1>The Real Game For Gamers!</h1>
 
-        <section class="scores">
-            <div class="computerScore">
-                <h2>Fake AI Score:</h2>
-                <p id="computerPoints">0</p>
-            </div>
-            <div class="playerScore">
-                <h2>Player Score:</h2>
-                <p id="playerPoints">0</p>
+        <!-- Player Part -->
+        <section class="choices">
+            <div class="playerChoice">
+                <div class="playerScore">
+                    <h2>Player Score:</h2>
+                    <p id="playerPoints">0</p>
+                </div>
+                <div id="picJokenpoPlayer">
+                    <img
+                        src="imgs/rock-svgrepo-com.svg"
+                        alt=""
+                        class="hide playerPics"
+                        id="rockPic"
+                    />
+                    <img
+                        src="imgs/paper-svgrepo-com.svg"
+                        alt=""
+                        class="hide playerPics"
+                        id="paperPic"
+                    />
+                    <img
+                        src="imgs/scissor-svgrepo-com.svg"
+                        alt=""
+                        class="playerPics"
+                        id="scissorPic"
+                    />
+                </div>
             </div>
 
-            <p id="roundDetails"></p>
+            <!-- Fight Button to see result -->
+
+            <div class="vsP">
+                <p>VS</p>
+                <button id="fightBtn">FIGHT</button>
+                <p id="roundDetails"></p>
+            </div>
+
+            <!-- Computer Part -->
+
+            <div class="computerChoice">
+                <div class="computerScore">
+                    <h2>Fake AI Score:</h2>
+                    <p id="computerPoints">0</p>
+                </div>
+                <div id="picJokenpoComputer">
+                    <img
+                        src="imgs/question-mark-svgrepo-com.svg"
+                        alt=""
+                        id="computerQuestion"
+                    />
+                    <img
+                        src="imgs/rock-svgrepo-com.svg"
+                        alt=""
+                        class="computerPic hide"
+                        id="computerRock"
+                    />
+                    <img
+                        src="imgs/paper-svgrepo-com.svg"
+                        alt=""
+                        class="hide computerPic"
+                        id="computerPaper"
+                    />
+                    <img
+                        src="imgs/scissor-svgrepo-com.svg"
+                        alt=""
+                        class="hide computerPic"
+                        id="computerScissor"
+                    />
+                </div>
+            </div>
         </section>
 
-        <button id="againBtn">Again!</button>
+        <!-- Player buttons -->
+        <div id="playerButtons">
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn">
+                    <input
+                        type="radio"
+                        name="options"
+                        id="playerRock"
+                        checked
+                    />
+                    Rock
+                </label>
+                <label class="btn">
+                    <input type="radio" name="options" id="playerPaper" />
+                    Paper
+                </label>
+                <label class="btn">
+                    <input type="radio" name="options" id="playerScissor" />
+                    Scissor
+                </label>
+            </div>
+        </div>
+
+        <!-- Need to check -->
+
+        <section class="scores"></section>
+
+        <button id="resetBtn">Reset</button>
+
+        <!-- End -->
 
         <script src="javascript.js"></script>
     </body>
