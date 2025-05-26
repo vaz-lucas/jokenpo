@@ -30,64 +30,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const computerScissor = document.getElementById("computerScissor");
 
   // Variáveis de estado
-  let playerChoice = "";
+  let playerChoice = "rock";
   let computerChoice = "";
 
   function getComputerChoice() {
-    let computerResult = Math.ceil(Math.random() * 3);
-    if (computerResult === 1) {
-      return "rock";
-    }
-    if (computerResult === 2) {
-      return "paper";
-    } else {
-      return "scissor";
-    }
+    const choices = ["rock", "paper", "scissor"];
+    return choices[Math.floor(Math.random() * 3)];
   }
 
-  // function getPlayerChoice() {
-  //   playerChoice = prompt("Rock, Paper or Scissor?").toLowerCase();
-
-  //   while (!["rock", "paper", "scissor"].includes(playerChoice)) {
-  //     playerChoice = prompt(
-  //       "Please, choose only one of the three: Rock, Paper or Scissor?",
-  //     ).toLowerCase();
-  //   }
-  //   return playerChoice;
-  // }
-
   function getPlayerChoice() {
-    if (playerRock.checked) {
-      console.log("ROCK ROCK ROCK");
-      return "rock";
-    } else if (playerPaper.checked) {
-      console.log("PAPER PAPER PAPER");
-      return "paper";
-    } else {
-      console.log("SCISSOR SCISSOR SCISSOR");
-      return "scissor";
-    }
+    if (playerRock.checked) return "rock";
+    if (playerPaper.checked) return "paper";
+    return "scissor";
   }
 
   function changePlayerPicture() {
     // Esconde todas as imagens do jogador
     playerPics.forEach((pic) => pic.classList.add("hide"));
 
-    // Mostra a imagem selecionada
-    if (playerRock.checked) {
-      rockPic.classList.remove("hide");
-      playerChoice = "rock";
-    } else if (playerPaper.checked) {
-      paperPic.classList.remove("hide");
-      playerChoice = "paper";
-    } else if (playerScissor.checked) {
-      scissorPic.classList.remove("hide");
-      playerChoice = "scissor";
-    }
+    // Mostra apenas a imagem selecionada
+    playerChoice = getPlayerChoice(); // Atualiza a variável de estado
+    document.getElementById(`${playerChoice}Pic`).classList.remove("hide");
   }
 
   function revealComputerChoice(choice) {
     computerQuestion.classList.add("hide");
+    computerPics.forEach((pic) => pic.classList.remove("hide"));
     computerPics.forEach((pic) => pic.classList.add("hide"));
 
     switch (choice) {
@@ -104,52 +72,39 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function resetImages() {
-    computerPics.forEach((pic) => pic.classList.add("hide"));
     computerQuestion.classList.remove("hide");
-
+    computerPics.forEach((pic) => pic.classList.add("hide"));
     changePlayerPicture();
   }
 
   function playRound() {
-    if (!playerChoice) {
-      roundDetails.textContent = "Please select an option!";
+    playerChoice = getPlayerChoice(); // Garante que temos o valor atual
+    computerChoice = getComputerChoice();
+
+    revealComputerChoice(computerChoice);
+    checkWinner(playerChoice, computerChoice);
+  }
+
+  function checkWinner(playerInput, computerInput) {
+    console.log("Player:", playerInput, "| AI:", computerInput);
+
+    if (playerInput === computerInput) {
+      roundDetails.textContent = "Round tie!";
       return;
     }
 
-    computerChoice = getComputerChoice();
-    revealComputerChoice(computerChoice);
-    checkWinner();
-  }
-
-  function checkWinner() {
-    // if (checkGameOver()) return;
-
-    const computerInput = getComputerChoice();
-    const playerInput = getPlayerChoice();
-    console.log("Fake AI: " + computerInput);
-    console.log("Player: " + playerInput);
-
-    if (
-      (playerInput === "rock" && computerInput === "scissor") ||
-      (playerInput === "scissor" && computerInput === "paper") ||
-      (playerInput === "paper" && computerInput === "rock")
-    ) {
+    const winConditions = {
+      rock: "scissor",
+      paper: "rock",
+      scissor: "paper",
+    };
+    if (winConditions[playerInput] === computerInput) {
       playerPoints.textContent = parseInt(playerPoints.textContent) + 1;
       roundDetails.textContent = "You won this round!";
-    }
-    if (
-      (computerInput === "rock" && playerInput === "scissor") ||
-      (computerInput === "scissor" && playerInput === "paper") ||
-      (computerInput === "paper" && playerInput === "rock")
-    ) {
+    } else {
       computerPoints.textContent = parseInt(computerPoints.textContent) + 1;
       roundDetails.textContent = "Fake AI won this round!";
     }
-    if (playerInput === computerInput) {
-      roundDetails.textContent = "Round tie!";
-    }
-
-    // checkGameOver();
   }
 
   // function checkGameOver() {
@@ -175,18 +130,23 @@ document.addEventListener("DOMContentLoaded", () => {
     checkWinner();
   }
 
-  getPlayerChoice();
+  // getPlayerChoice();
 
   function resetBattle() {
     playerPoints.textContent = "0";
     computerPoints.textContent = "0";
     roundDetails.textContent = "";
+    playerRock.checked = true;
+    playerChoice = "rock";
     resetImages();
   }
 
   // Event Listeners
   fightBtn.addEventListener("click", playRound);
   resetBtn.addEventListener("click", resetBattle);
+  playerRock.addEventListener("change", changePlayerPicture);
+  playerPaper.addEventListener("change", changePlayerPicture);
+  playerScissor.addEventListener("change", changePlayerPicture);
 
   // Change player picture
   playerRock.addEventListener("change", changePlayerPicture);
@@ -194,6 +154,5 @@ document.addEventListener("DOMContentLoaded", () => {
   playerScissor.addEventListener("change", changePlayerPicture);
 
   // Inicializa com uma seleção padrão
-  playerRock.checked = true;
   changePlayerPicture();
 });
